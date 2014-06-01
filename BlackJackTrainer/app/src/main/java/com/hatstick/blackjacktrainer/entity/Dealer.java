@@ -1,5 +1,7 @@
 package com.hatstick.blackjacktrainer.entity;
 
+import java.util.ArrayList;
+
 /**
  * Created by Alex on 5/31/2014.
  */
@@ -16,7 +18,7 @@ public class Dealer {
     }
 
     // Start of the game dealing
-    public void deal(Player[] players) {
+    public void deal(ArrayList<Player> players) {
         for( int i = 0; i < 2; i++ ) {
             for (Player player : players) {
                 hit(player);

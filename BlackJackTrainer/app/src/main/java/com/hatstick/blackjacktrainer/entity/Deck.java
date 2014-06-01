@@ -14,7 +14,6 @@ public class Deck {
 
     public Deck() {
         createDeck();
-        System.out.println(deck.size());
     }
 
     private void createDeck() {
@@ -42,7 +41,9 @@ public class Deck {
     }
 
     public Card drawCard() {
-        return deck.remove(0);
+        Card card = deck.get(0);
+        deck.remove(0);
+        return card;
     }
 
     public List getDeck() {

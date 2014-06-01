@@ -9,31 +9,33 @@ import com.hatstick.blackjacktrainer.app.R;
 import com.hatstick.blackjacktrainer.entity.Card;
 import com.hatstick.blackjacktrainer.entity.Dealer;
 import com.hatstick.blackjacktrainer.entity.Deck;
+import com.hatstick.blackjacktrainer.entity.Player;
 
 import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity {
 
+    private ArrayList<Player> players = new ArrayList<Player>();
+    private Dealer dealer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Dealer dealer = new Dealer();
+        dealer = new Dealer();
         dealer.shuffle();
 
-/*
-        Deck deck = new Deck();
-        ArrayList<Card> list = deck.getDeck();
-        for( Card card : list) {
-            card.printCard();
+        players.add(new Player("Jordan"));
+        players.add(new Player("Alex"));
+        players.add(new Player("Aaron"));
+
+        dealer.deal(players);
+
+        for( Player player : players) {
+            player.printHand();
         }
-        System.out.println("SHUFFLED!");
-        deck.shuffle();
-        for( Card card : list) {
-            card.printCard();
-        }*/
     }
 
 

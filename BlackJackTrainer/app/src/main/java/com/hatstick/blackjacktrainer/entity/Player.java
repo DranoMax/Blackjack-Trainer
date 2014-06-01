@@ -8,13 +8,22 @@ import java.util.ArrayList;
 public class Player {
 
     private int chips;
+    private String name;
     private Hand hand;
 
-    public Player() {
+    public Player(String name) {
         this.chips = 100;
+        this.name = name;
+        this.hand = new Hand();
     }
 
     public ArrayList<Card> getHand() {
         return hand.getHand();
+    }
+
+    public void printHand() {
+        System.out.print(name + " has ");
+        hand.printHand();
+        System.out.println();
     }
 }

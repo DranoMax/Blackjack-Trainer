@@ -50,10 +50,10 @@ public class Card {
 
     public void printCard() {
         if( name != null ) {
-            System.out.println(name + " of " + suit);
+            System.out.print(name + " of " + suit);
         }
         else {
-            System.out.println(value + " of " + suit);
+            System.out.print(value + " of " + suit);
         }
     }
 
