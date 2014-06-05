@@ -21,13 +21,13 @@ public class Card {
     private String getSuitString(SUIT suit) {
         switch(suit) {
             case HEARTS:
-                return "Hearts";
+                return "hearts";
             case SPADES:
-                return "Spades";
+                return "spades";
             case CLUBS:
-                return "Clubs";
+                return "clubs";
             case DIAMONDS:
-                return "Diamonds";
+                return "diamonds";
             default:
                 return null;
         }
@@ -36,24 +36,33 @@ public class Card {
     private String getNameString(NAME name) {
         switch(name) {
             case ACE:
-                return "Ace";
+                return "ace";
             case JACK:
-                return "Jack";
+                return "jack";
             case QUEEN:
-                return "Queen";
+                return "queen";
             case KING:
-                return "King";
+                return "king";
             default:
                 return null;
         }
     }
 
-    public void printCard() {
-        if( name != null ) {
-            System.out.print(name + " of " + suit);
+    public String getCard() {
+    	if( name != null ) {
+            return (name + "_of_" + suit);
         }
         else {
-            System.out.print(value + " of " + suit);
+            return (value + "_of_" + suit);
+        }
+    }
+    
+    public void printCard() {
+        if( name != null ) {
+            System.out.print(name + "_of_" + suit);
+        }
+        else {
+            System.out.print(value + "_of_" + suit);
         }
     }
 
