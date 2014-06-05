@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Table {
+public class CardTable {
 
 	private ArrayList<Player> seats;
 	private final int TABLE_SIZE = 4;
 	private int screenWidth;
 	private int screenHeight;
 
-	public Table(int screenWidth, int screenHeight) {
+	public CardTable(int screenWidth, int screenHeight) {
 		// 4 seats at the table
 		seats = new ArrayList<Player>();
 		this.screenWidth = screenWidth;
