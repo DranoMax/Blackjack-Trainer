@@ -50,10 +50,10 @@ public class PlayBlackjackScreen implements Screen {
         table = new Table(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
         
         players.add(new Player("Alex"));
-        players.add(new Player("Andrew"));
+   //     players.add(new Player("Andrew"));
 
         table.sitDown(players.get(0));
-        table.sitDown(players.get(1));
+   //     table.sitDown(players.get(1));
     }
     
     private void setupSprites() {
@@ -63,14 +63,14 @@ public class PlayBlackjackScreen implements Screen {
     private void loadCards() {
     	atlas = new TextureAtlas(Gdx.files.internal("cards/cards.pack"));
     	cardImages = new HashMap<String,Sprite>();
-    	cardSize.set(game.SCREEN_HEIGHT/(table.getNumberPlayers()+3),game.SCREEN_HEIGHT/(table.getNumberPlayers()+3));
+    	cardSize.set(game.SCREEN_HEIGHT/(table.getNumberPlayers()+1),game.SCREEN_HEIGHT/(table.getNumberPlayers()+1));
     	
     	// Load all cards into a map of name -> image
     	// For now, we are simply scaling the image but we should find a
     	// source for different sized images and load them based on resolution
     	for( AtlasRegion region : atlas.getRegions()) {
     		cardImages.put(region.name, atlas.createSprite(region.name));
-    		cardImages.get(region.name).setSize(cardSize.x, cardSize.y);
+    		cardImages.get(region.name).setScale(cardSize.x/region.getTexture().getWidth());
     	}
     }
     
@@ -85,7 +85,7 @@ public class PlayBlackjackScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+		Gdx.gl.glClearColor(0,256,0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		camera.update();
@@ -103,7 +103,7 @@ public class PlayBlackjackScreen implements Screen {
 				/*
 				 * TODO: Change 50 (the width of our cards) to a standard variable that we can draw from
 				 */
-				spacer += cardSize.x/3; 
+				spacer += cardSize.x/4; 
 			}
 		}
 		game.batch.end();		
