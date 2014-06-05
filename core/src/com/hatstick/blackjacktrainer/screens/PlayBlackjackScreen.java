@@ -13,10 +13,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.TextureAtlasData.Region;
+import com.badlogic.gdx.math.Vector2;
 import com.hatstick.blackjacktrainer.BlackjackTrainer;
 import com.hatstick.blackjacktrainer.entity.Card;
 import com.hatstick.blackjacktrainer.entity.Dealer;
 import com.hatstick.blackjacktrainer.entity.Player;
+import com.hatstick.blackjacktrainer.entity.Table;
 
 public class PlayBlackjackScreen implements Screen {
 
@@ -25,22 +27,33 @@ public class PlayBlackjackScreen implements Screen {
     private OrthographicCamera camera;
     private TextureAtlas atlas;
     private Map<String,Sprite> cardImages;
+    private Vector2 cardSize = new Vector2();
     
     private ArrayList<Player> players = new ArrayList<Player>();
     private Dealer dealer;
+    private Table table;
 
     public PlayBlackjackScreen(final BlackjackTrainer game) {
         this.game = game;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
         camera.position.set(800/2, 480/2, 0f); 
         
-        dealer = new Dealer();
-        players.add(new Player("Alex"));
-        
+        createGame();
         setupSprites();
         startGame();
+    }
+    
+    private void createGame() {
+    	dealer = new Dealer();
+        table = new Table(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
+        
+        players.add(new Player("Alex"));
+        players.add(new Player("Andrew"));
+
+        table.sitDown(players.get(0));
+        table.sitDown(players.get(1));
     }
     
     private void setupSprites() {
@@ -50,13 +63,14 @@ public class PlayBlackjackScreen implements Screen {
     private void loadCards() {
     	atlas = new TextureAtlas(Gdx.files.internal("cards/cards.pack"));
     	cardImages = new HashMap<String,Sprite>();
+    	cardSize.set(game.SCREEN_HEIGHT/(table.getNumberPlayers()+3),game.SCREEN_HEIGHT/(table.getNumberPlayers()+3));
     	
     	// Load all cards into a map of name -> image
     	// For now, we are simply scaling the image but we should find a
     	// source for different sized images and load them based on resolution
     	for( AtlasRegion region : atlas.getRegions()) {
     		cardImages.put(region.name, atlas.createSprite(region.name));
-    		cardImages.get(region.name).setSize(50, 50);
+    		cardImages.get(region.name).setSize(cardSize.x, cardSize.y);
     	}
     }
     
@@ -78,9 +92,18 @@ public class PlayBlackjackScreen implements Screen {
 		game.batch.setProjectionMatrix(camera.combined);
 
 		game.batch.begin();
+		Sprite sprite = new Sprite();
+		int spacer;
 		for( Player player : players) {
-			for( Card card : player.getHand()) {
-				cardImages.get(card.getCard()).draw(game.batch);
+			spacer = 0;
+			for( Card card : player.getHand()) {				
+				sprite = cardImages.get(card.getCard());
+				sprite.setPosition(player.getPosition().x+spacer, player.getPosition().y);
+				sprite.draw(game.batch);
+				/*
+				 * TODO: Change 50 (the width of our cards) to a standard variable that we can draw from
+				 */
+				spacer += cardSize.x/3; 
 			}
 		}
 		game.batch.end();		
