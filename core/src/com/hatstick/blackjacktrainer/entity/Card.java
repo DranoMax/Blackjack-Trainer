@@ -16,6 +16,7 @@ public class Card {
         this.suit = getSuitString(suit);
         this.name = getNameString(name);
         this.value = value;
+
     }
 
     private String getSuitString(SUIT suit) {
