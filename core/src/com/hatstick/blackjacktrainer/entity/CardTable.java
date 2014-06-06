@@ -27,7 +27,7 @@ public class CardTable {
 			// TODO: 1.75f is a number found to look good - should be something independent instead.
 			int spacer = 0;
 			for( Player plyr : seats ) {
-				plyr.setPosition(new Vector2(spacer,-screenHeight/1.75f));
+				plyr.setPosition(new Vector2(spacer,-screenHeight/3f));
 				spacer += screenWidth/TABLE_SIZE;
 			}
 		}

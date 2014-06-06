@@ -26,6 +26,7 @@ import com.hatstick.blackjacktrainer.entity.Card;
 import com.hatstick.blackjacktrainer.entity.Dealer;
 import com.hatstick.blackjacktrainer.entity.Player;
 import com.hatstick.blackjacktrainer.entity.CardTable;
+import com.hatstick.blackjacktrainer.factory.ButtonFactory;
 
 public class PlayBlackjackScreen implements Screen {
 
@@ -41,18 +42,10 @@ public class PlayBlackjackScreen implements Screen {
     private CardTable cardTable;
     
     // Buttons
+    private ButtonFactory buttonFactory = new ButtonFactory();
     private TextButton hitButton;
     private TextButton standButton;
-    private Skin buttonSkin;
-    private BitmapFont font;
     
-    // HitButton
-    private TextButtonStyle hitButtonStyle;
-    
-    // StandButton
-    private TextButtonStyle standButtonStyle;
-    
-    private TextureAtlas buttonAtlas;
     private Stage stage;
 
     public PlayBlackjackScreen(final BlackjackTrainer game) {
@@ -84,26 +77,15 @@ public class PlayBlackjackScreen implements Screen {
     }
     
     private void setupButtons() {
+    	
     	Table table = new Table();
     	table.setFillParent(true);
     	table.align(Align.bottom);
     	stage = new Stage();
     	Gdx.input.setInputProcessor(stage);
     	
-    	font = new BitmapFont();
-    	
-    	buttonSkin = new Skin();
-    	buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.pack"));
-    	buttonSkin.addRegions(buttonAtlas);
-    	
-    	// Hit Style
-    	hitButtonStyle = new TextButtonStyle();
-    	hitButtonStyle.font = font;
-    	hitButtonStyle.up = buttonSkin.getDrawable("hit");
-    	hitButtonStyle.down = buttonSkin.getDrawable("hit_pressed");
-    	
-    	// Create hitButton
-    	hitButton = new TextButton("Hit", hitButtonStyle);	
+    	standButton = buttonFactory.createButton("Stand", "stand", "stand_pressed");
+    	hitButton = buttonFactory.createButton("Hit", "hit", "hit_pressed");
     	hitButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
@@ -111,17 +93,8 @@ public class PlayBlackjackScreen implements Screen {
 				  System.out.println(players.get(0).getHand().getTotal());   
 			}
     	});
+    	
     	table.add(hitButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/8);
- 
-    	
-    	// Stand Style
-    	standButtonStyle = new TextButtonStyle();
-    	standButtonStyle.font = font;
-    	standButtonStyle.up = buttonSkin.getDrawable("stand");
-    	standButtonStyle.down = buttonSkin.getDrawable("stand_pressed");
-    	
-    	// Create hitButton
-    	standButton = new TextButton("Stand", standButtonStyle);	
     	table.add(standButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/8);
     	stage.addActor(table);
     }

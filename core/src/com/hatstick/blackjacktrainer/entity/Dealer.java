@@ -2,12 +2,15 @@ package com.hatstick.blackjacktrainer.entity;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * Created by Alex on 5/31/2014.
  */
 public class Dealer {
 
     private Deck deck;
+    private Vector2 position;
 
     public Dealer() {
         this.deck = new Deck();
@@ -30,4 +33,5 @@ public class Dealer {
     public void hit(Player player) {
         player.getHandArray().add(deck.drawCard());
     }
+    
 }
