@@ -60,7 +60,7 @@ public class PlayBlackjackScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
-        camera.position.set(800/2, 480/2, 0f);      
+        camera.position.set(game.SCREEN_WIDTH/2, game.SCREEN_HEIGHT/2, 0f);      
         
         createGame();
         setupSprites();
@@ -167,7 +167,7 @@ public class PlayBlackjackScreen implements Screen {
 				sprite.setPosition(player.getPosition().x+spacer, player.getPosition().y);
 				sprite.draw(game.batch);
 
-				spacer += cardSize.x/4; 
+				spacer += cardSize.x/10; 
 			}
 		}
 		game.batch.end();		

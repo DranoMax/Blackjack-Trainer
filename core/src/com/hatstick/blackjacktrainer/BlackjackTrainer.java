@@ -14,8 +14,8 @@ public class BlackjackTrainer extends Game {
     public SpriteBatch batch;
     public BitmapFont font;
     
-    public static final int SCREEN_WIDTH = 800;
-    public static final int SCREEN_HEIGHT = 480;
+    public static final int SCREEN_WIDTH = 1000;
+    public static final int SCREEN_HEIGHT = 600;
 
     public void create() {
         batch = new SpriteBatch();
