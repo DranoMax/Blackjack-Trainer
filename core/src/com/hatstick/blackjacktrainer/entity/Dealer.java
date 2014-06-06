@@ -28,6 +28,6 @@ public class Dealer {
 
     // "Hit me"
     public void hit(Player player) {
-        player.getHand().add(deck.drawCard());
+        player.getHandArray().add(deck.drawCard());
     }
 }

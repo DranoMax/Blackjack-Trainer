@@ -21,8 +21,12 @@ public class Player {
         this.hand = new Hand();
     }
 
-    public ArrayList<Card> getHand() {
+    public ArrayList<Card> getHandArray() {
         return hand.getHand();
+    }
+    
+    public Hand getHand() {
+    	return hand;
     }
 
     public void printHand() {

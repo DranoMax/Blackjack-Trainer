@@ -13,12 +13,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.hatstick.blackjacktrainer.BlackjackTrainer;
 import com.hatstick.blackjacktrainer.entity.Card;
 import com.hatstick.blackjacktrainer.entity.Dealer;
@@ -102,6 +104,13 @@ public class PlayBlackjackScreen implements Screen {
     	
     	// Create hitButton
     	hitButton = new TextButton("Hit", hitButtonStyle);	
+    	hitButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				  dealer.hit(players.get(0));
+				  System.out.println(players.get(0).getHand().getTotal());   
+			}
+    	});
     	table.add(hitButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/8);
  
     	
@@ -136,7 +145,7 @@ public class PlayBlackjackScreen implements Screen {
     	dealer.deal(players);
     	
     	for( Player player : players) {
-            player.printHand();
+            System.out.println(player.getHand().getTotal());   
         }
     }
 
@@ -153,7 +162,7 @@ public class PlayBlackjackScreen implements Screen {
 		int spacer;
 		for( Player player : players) {
 			spacer = 0;
-			for( Card card : player.getHand()) {				
+			for( Card card : player.getHandArray()) {				
 				sprite = cardImages.get(card.getCard());
 				sprite.setPosition(player.getPosition().x+spacer, player.getPosition().y);
 				sprite.draw(game.batch);

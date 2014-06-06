@@ -23,4 +23,12 @@ public class Hand {
             System.out.print(" ");
         }
     }
+    
+    public int getTotal() {
+    	int total = 0;
+    	for( Card card : hand ) { 
+    		total += card.getValue();
+    	}
+    	return total;
+    }
 }
