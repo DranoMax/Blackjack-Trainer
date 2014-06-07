@@ -114,8 +114,8 @@ public class PlayBlackjackScreen implements Screen {
     }
     
     private void startGame() {
-    	dealer.shuffle();
-    	dealer.deal(players);
+    	
+    	dealer.beginRound(players);
     	
     	for( Player player : players) {
             System.out.println(player.getHand().getTotal());   

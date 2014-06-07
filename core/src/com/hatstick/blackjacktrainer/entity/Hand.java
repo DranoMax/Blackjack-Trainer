@@ -8,6 +8,11 @@ import java.util.ArrayList;
 public class Hand {
 
     private ArrayList<Card> hand;
+    public static final int OPEN = 0;
+    public static final int STAND = 1;
+    public static final int BUST = 2;
+    public static final int BLACKJACK = 3;
+    private int status = OPEN;
 
     public Hand() {
         hand = new ArrayList<Card>();
@@ -24,6 +29,10 @@ public class Hand {
         }
     }
     
+    public void addCard(Card card) {
+    	hand.add(card);
+    }
+    
     public int getTotal() {
     	int total = 0;
     	for( Card card : hand ) { 
@@ -31,4 +40,13 @@ public class Hand {
     	}
     	return total;
     }
+    
+    public void setStatus(int status) {
+    	this.status = status;
+    }
+    
+    public int getStatus() {
+    	return status;
+    }
+    
 }
