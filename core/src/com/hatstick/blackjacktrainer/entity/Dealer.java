@@ -22,11 +22,19 @@ public class Dealer {
 		this.position = new Vector2();
 	}
 
+	/**
+	 * Shuffle and deal
+	 * @param players
+	 */
 	public void beginRound(ArrayList<Player> players) {
 		shuffle();
 		deal(players);
 	}
 
+	/**
+	 * Perform each player's turn (humanplayer in a loop)
+	 * @param players
+	 */
 	public void continueRound(ArrayList<Player> players) {
 		// Now each player takes their turn
 		for (Player player : players) {
@@ -41,7 +49,63 @@ public class Dealer {
 		// Dealer's turn
 		if (playerTurn == false) {
 			dealerTurn();
+			finishRound(players);
 		}
+	}
+
+	/**
+	 * Check to see who won.
+	 * @param players
+	 */
+	private void finishRound(ArrayList<Player> players) {
+		for (Player player : players) {
+			// Pay 3:2 for blackjack
+			switch(player.getHand().getStatus()) {
+
+			case Hand.BLACKJACK:
+				blackjack(player);
+				break;
+			case Hand.STAND:
+				checkForWin(player);
+				break;
+			case Hand.BUST:
+				bustedHand(player);
+				break;
+			}
+		}
+	}
+
+	/**
+	 * Player won blackjack!  Recieve bet 3:2
+	 * @param player
+	 */
+	private void blackjack(Player player) {
+		player.getHand().printHand();
+		System.out.println("BLACKJACK!!");
+	}
+
+	private void checkForWin(Player player) {
+
+		// Check if Dealer busted
+		if (hand.getStatus() == Hand.BUST && player.getHand().getStatus() != Hand.BUST) {
+			System.out.println("Player wins!");
+		}
+		// Else check the totals
+		else {
+			if (player.getHand().getTotal() > hand.getTotal()) {
+				System.out.println("Player wins!");
+			}
+			else if (player.getHand().getTotal() == hand.getTotal()) {
+				System.out.println("PUSH");
+			}
+			else {
+				System.out.println("LOST!");
+			}
+		}
+	}
+
+	private void bustedHand(Player player) {
+		System.out.println("BUST!");
 	}
 
 	public void playerTurn(ComputerPlayer player) {
