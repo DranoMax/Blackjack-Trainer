@@ -14,11 +14,14 @@ public abstract class Player {
     private Hand hand;
     // Used for rendering sprite locations according to seat
  	private Vector2 seatPosition;
+ 	
+ 	private int currentBet;
 
     public Player(String name) {
         this.chips = 100;
         this.name = name;
         this.hand = new Hand();
+        this.currentBet = 0;
     }
 
     public ArrayList<Card> getHandArray() {
@@ -45,5 +48,27 @@ public abstract class Player {
     
     public int getChips() {
     	return chips;
+    }
+    
+    public int getBet() {
+    	return currentBet;
+    }
+    
+    public void increaseBet(int increase) {
+    	if (currentBet+increase <= chips) {
+    		currentBet += increase;
+    	}
+    	else {
+    		currentBet = chips;
+    	}
+    }
+    
+    public void decreaseBet(int decrease) {
+    	if (currentBet-decrease >= 0) {
+    		currentBet -= decrease;
+    	}
+    	else {
+    		currentBet = 0;
+    	}
     }
 }

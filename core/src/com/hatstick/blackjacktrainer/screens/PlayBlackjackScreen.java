@@ -105,12 +105,12 @@ public class PlayBlackjackScreen implements Screen {
 			}
 		});
 		//betButton = buttonFactory.createBetButton();
-		Table test = buttonFactory.createBetButton();
+		Table test = buttonFactory.createBetButton((HumanPlayer)players.get(0));
 
 		
 		table.add(test).width(game.SCREEN_WIDTH/6).height(game.SCREEN_HEIGHT/8).expandX().right();
-		table.add(hitButton).width(game.SCREEN_WIDTH/6).height(game.SCREEN_HEIGHT/8).right();
-		table.add(standButton).width(game.SCREEN_WIDTH/6).height(game.SCREEN_HEIGHT/8).right();
+		table.add(hitButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).right();
+		table.add(standButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).right();
 		stage.addActor(table);
 
 	}
