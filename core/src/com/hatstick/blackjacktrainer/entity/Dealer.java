@@ -13,15 +13,63 @@ public class Dealer {
 	private Hand hand;
 	private Vector2 position;
 
+	// If it's player turn, show buttons for interacting
+	private boolean playerTurn = false;
+
 	public Dealer() {
 		this.deck = new Deck();
 		this.hand = new Hand();
 		this.position = new Vector2();
 	}
-	
+
 	public void beginRound(ArrayList<Player> players) {
 		shuffle();
-    	deal(players);
+		deal(players);
+	}
+
+	public void continueRound(ArrayList<Player> players) {
+		// Now each player takes their turn
+		for (Player player : players) {
+			if (player instanceof ComputerPlayer) {
+				playerTurn((ComputerPlayer)player);
+			}
+			else {
+				playerTurn((HumanPlayer)player);
+			}
+		}
+
+		// Dealer's turn
+		if (playerTurn == false) {
+			dealerTurn();
+		}
+	}
+
+	public void playerTurn(ComputerPlayer player) {
+		// Player logic - simple - draw till >= 17
+		playerTurn = false;
+		Hand hand = player.getHand();
+		while (hand.getTotal() < 17 && hand.getStatus() != Hand.BUST) {
+			hit(player);
+		}
+		// If we didn't bust, stand.
+		if (hand.getStatus() != Hand.BUST) {
+			hand.setStatus(Hand.STAND);
+		}
+
+	}
+
+	public void playerTurn(HumanPlayer player) {
+		playerTurn = true;
+		if (player.getHand().getStatus() != Hand.OPEN) {
+			playerTurn = false;
+		}
+	}
+
+	public void dealerTurn() {
+
+		while (hand.getTotal() < 17 && hand.getStatus() != Hand.BUST) {
+			hand.addCard(deck.drawCard());
+		}
 	}
 
 	public void shuffle() {
@@ -39,7 +87,7 @@ public class Dealer {
 		}
 		checkForBlackjack(players);
 	}
-	
+
 	/**
 	 * Checks for blackjack on first hand sets status
 	 */
@@ -71,6 +119,10 @@ public class Dealer {
 
 			}
 		}
+	}
+
+	public boolean isPlayerTurn() {
+		return playerTurn;
 	}
 
 	public Hand getHand() {

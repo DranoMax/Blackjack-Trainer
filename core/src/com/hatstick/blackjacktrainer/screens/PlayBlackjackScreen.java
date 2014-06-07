@@ -24,103 +24,113 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.hatstick.blackjacktrainer.BlackjackTrainer;
 import com.hatstick.blackjacktrainer.entity.Card;
+import com.hatstick.blackjacktrainer.entity.ComputerPlayer;
 import com.hatstick.blackjacktrainer.entity.Dealer;
+import com.hatstick.blackjacktrainer.entity.Hand;
+import com.hatstick.blackjacktrainer.entity.HumanPlayer;
 import com.hatstick.blackjacktrainer.entity.Player;
 import com.hatstick.blackjacktrainer.entity.CardTable;
 import com.hatstick.blackjacktrainer.factory.ButtonFactory;
 
 public class PlayBlackjackScreen implements Screen {
 
-    final BlackjackTrainer game;
+	final BlackjackTrainer game;
 
-    private OrthographicCamera camera;
-    private TextureAtlas atlas;
-    private Map<String,Sprite> cardImages;
-    private Vector2 cardSize = new Vector2();
-    
-    private ArrayList<Player> players = new ArrayList<Player>();
-    private Dealer dealer;
-    private CardTable cardTable;
-    
-    // Buttons
-    private ButtonFactory buttonFactory = new ButtonFactory();
-    private TextButton hitButton;
-    private TextButton standButton;
-    
-    private Stage stage;
+	private OrthographicCamera camera;
+	private TextureAtlas atlas;
+	private Map<String,Sprite> cardImages;
+	private Vector2 cardSize = new Vector2();
 
-    public PlayBlackjackScreen(final BlackjackTrainer game) {
-        this.game = game;
+	private ArrayList<Player> players = new ArrayList<Player>();
+	private Dealer dealer;
+	private CardTable cardTable;
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
-        
-        createGame();
-        setupSprites();
-        startGame();
-    }
-    
-    private void createGame() {
-    	dealer = new Dealer();
-        cardTable = new CardTable(dealer, game.SCREEN_WIDTH, game.SCREEN_HEIGHT, cardSize);
-        
-        players.add(new Player("Alex"));
-   //     players.add(new Player("Andrew"));
+	// Buttons
+	private ButtonFactory buttonFactory = new ButtonFactory();
+	private TextButton hitButton;
+	private TextButton standButton;
 
-        cardTable.sitDown(players.get(0));
-   //     table.sitDown(players.get(1));
-    }
-    
-    private void setupSprites() {
-    	setupButtons();
-    	loadCards();
-    }
-    
-    private void setupButtons() {
-    	
-    	Table table = new Table();
-    	table.setFillParent(true);
-    	table.align(Align.bottom);
-    	stage = new Stage();
-    	Gdx.input.setInputProcessor(stage);
-    	
-    	standButton = buttonFactory.createButton("Stand", "stand", "stand_pressed");
-    	hitButton = buttonFactory.createButton("Hit", "hit", "hit_pressed");
-    	hitButton.addListener(new ChangeListener() {
+	private Stage stage;
+
+	public PlayBlackjackScreen(final BlackjackTrainer game) {
+		this.game = game;
+
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
+
+		createGame();
+		setupSprites();
+		startGame();
+	}
+
+	private void createGame() {
+		dealer = new Dealer();
+		cardTable = new CardTable(dealer, game.SCREEN_WIDTH, game.SCREEN_HEIGHT, cardSize);
+
+		players.add(new HumanPlayer("Alex"));
+		//       players.add(new ComputerPlayer("Andrew"));
+
+		cardTable.sitDown(players.get(0));
+		//       cardTable.sitDown(players.get(1));
+	}
+
+	private void setupSprites() {
+		setupButtons();
+		loadCards();
+	}
+
+	private void setupButtons() {
+
+		Table table = new Table();
+		table.setFillParent(true);
+		table.align(Align.bottom);
+		stage = new Stage();
+		Gdx.input.setInputProcessor(stage);
+
+		standButton = buttonFactory.createButton("Stand", "stand", "stand_pressed");
+		standButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				  dealer.hit(players.get(0));
-				  System.out.println(players.get(0).getHand().getTotal());   
+				players.get(0).getHand().setStatus(Hand.STAND);
 			}
-    	});
-    	
-    	table.add(hitButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/10);
-    	table.add(standButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/10);
-    	stage.addActor(table);
-    }
-    
-    private void loadCards() {
-    	atlas = new TextureAtlas(Gdx.files.internal("cards/cards.pack"));
-    	cardImages = new HashMap<String,Sprite>();
-    	cardSize.set(game.SCREEN_WIDTH/(cardTable.getNumberPlayers()+3),game.SCREEN_HEIGHT/(cardTable.getNumberPlayers()+1));
-    	
-    	// Load all cards into a map of name -> image
-    	// For now, we are simply scaling the image but we should find a
-    	// source for different sized images and load them based on resolution
-    	for( AtlasRegion region : atlas.getRegions()) {
-    		cardImages.put(region.name, atlas.createSprite(region.name));
-    		cardImages.get(region.name).setScale(cardSize.x/region.getTexture().getWidth());
-    	}
-    }
-    
-    private void startGame() {
-    	
-    	dealer.beginRound(players);
-    	
-    	for( Player player : players) {
-            System.out.println(player.getHand().getTotal());   
-        }
-    }
+		});
+		hitButton = buttonFactory.createButton("Hit", "hit", "hit_pressed");
+		hitButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				dealer.hit(players.get(0));
+				System.out.println(players.get(0).getHand().getTotal());   
+			}
+		});
+
+		table.add(hitButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/10);
+		table.add(standButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/10);
+		stage.addActor(table);
+
+	}
+
+	private void loadCards() {
+		atlas = new TextureAtlas(Gdx.files.internal("cards/cards.pack"));
+		cardImages = new HashMap<String,Sprite>();
+		cardSize.set(game.SCREEN_WIDTH/(cardTable.getNumberPlayers()+3),game.SCREEN_HEIGHT/(cardTable.getNumberPlayers()+1));
+
+		// Load all cards into a map of name -> image
+		// For now, we are simply scaling the image but we should find a
+		// source for different sized images and load them based on resolution
+		for( AtlasRegion region : atlas.getRegions()) {
+			cardImages.put(region.name, atlas.createSprite(region.name));
+			cardImages.get(region.name).setScale(cardSize.x/region.getTexture().getWidth());
+		}
+	}
+
+	private void startGame() {
+
+		dealer.beginRound(players);
+
+		for( Player player : players) {
+			System.out.println(player.getHand().getTotal());   
+		}
+	}
 
 	@Override
 	public void render(float delta) {
@@ -134,25 +144,30 @@ public class PlayBlackjackScreen implements Screen {
 		game.batch.begin();
 		drawCards();
 		game.batch.end();		
-		
-		stage.draw();
-		
+
+		/**
+		 * TODO: Move game logic out of render thread
+		 */
+		dealer.continueRound(players);
+		if (dealer.isPlayerTurn()) {
+			stage.draw();
+		}
 	}
-	
+
 	private void drawCards() {
-		
+
 		// Draw Player Cards
 		int spacer;
 		for( Player player : players) {
 			spacer = 0;
-			for( Card card : player.getHandArray()) {				
-				cardImages.get(card.getCard()).setPosition(player.getPosition().x-cardSize.x/1.32f+spacer, player.getPosition().y-cardSize.y/1.09f);
+			for( Card card : player.getHandArray()) {	
+				cardImages.get(card.getCard()).setPosition(player.getPosition().x+spacer, player.getPosition().y-cardSize.y);
 				cardImages.get(card.getCard()).draw(game.batch);
 
 				spacer += cardSize.x/10; 
 			}
 		}
-		
+
 		// Draw Dealer Cards
 		spacer = 0;
 		for( Card card : dealer.getHandArray() ) {
@@ -161,42 +176,42 @@ public class PlayBlackjackScreen implements Screen {
 
 			spacer += cardSize.x/10;
 		}
-		
+
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
