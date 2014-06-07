@@ -42,4 +42,8 @@ public abstract class Player {
     public Vector2 getPosition() {
     	return seatPosition;
     }
+    
+    public int getChips() {
+    	return chips;
+    }
 }

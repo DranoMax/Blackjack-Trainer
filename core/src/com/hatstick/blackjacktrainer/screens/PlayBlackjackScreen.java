@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -49,6 +50,7 @@ public class PlayBlackjackScreen implements Screen {
 	private ButtonFactory buttonFactory = new ButtonFactory();
 	private TextButton hitButton;
 	private TextButton standButton;
+	private ImageButton betButton;
 
 	private Stage stage;
 
@@ -87,14 +89,14 @@ public class PlayBlackjackScreen implements Screen {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 
-		standButton = buttonFactory.createButton("Stand", "stand", "stand_pressed");
+		standButton = buttonFactory.createButton("STAND", "stand", "stand_pressed");
 		standButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				players.get(0).getHand().setStatus(Hand.STAND);
 			}
 		});
-		hitButton = buttonFactory.createButton("Hit", "hit", "hit_pressed");
+		hitButton = buttonFactory.createButton("HIT", "hit", "hit_pressed");
 		hitButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
@@ -102,9 +104,13 @@ public class PlayBlackjackScreen implements Screen {
 				System.out.println(players.get(0).getHand().getTotal());   
 			}
 		});
+		//betButton = buttonFactory.createBetButton();
+		Table test = buttonFactory.createBetButton();
 
-		table.add(hitButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/10);
-		table.add(standButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/10);
+		
+		table.add(test).width(game.SCREEN_WIDTH/6).height(game.SCREEN_HEIGHT/8).expandX().right();
+		table.add(hitButton).width(game.SCREEN_WIDTH/6).height(game.SCREEN_HEIGHT/8).right();
+		table.add(standButton).width(game.SCREEN_WIDTH/6).height(game.SCREEN_HEIGHT/8).right();
 		stage.addActor(table);
 
 	}
@@ -142,7 +148,9 @@ public class PlayBlackjackScreen implements Screen {
 
 		// Draw Cards
 		game.batch.begin();
-		drawCards();
+		game.font.setScale(1.5f);
+		game.font.draw(game.batch, "Chips: " + players.get(0).getChips(), 0, game.SCREEN_HEIGHT);
+		drawCards();	
 		game.batch.end();		
 
 		/**
@@ -151,6 +159,7 @@ public class PlayBlackjackScreen implements Screen {
 		dealer.continueRound(players);
 		if (dealer.isPlayerTurn()) {
 			stage.draw();
+			Table.drawDebug(stage);
 		}
 	}
 
