@@ -8,6 +8,7 @@ public class Card {
     private final String suit;
     private final String name;
     private final int value;
+    private int size = 0;
 
     enum SUIT {HEARTS, SPADES, CLUBS, DIAMONDS};
     enum NAME {KING, QUEEN, JACK, ACE, NONE};
@@ -16,7 +17,6 @@ public class Card {
         this.suit = getSuitString(suit);
         this.name = getNameString(name);
         this.value = value;
-
     }
 
     private String getSuitString(SUIT suit) {
@@ -77,6 +77,14 @@ public class Card {
 
     public int getValue() {
         return value;
+    }
+    
+    public void setSize(int i) {
+    	size = i;
+    }
+    
+    public int getSize() {
+    	return size;
     }
 
 }

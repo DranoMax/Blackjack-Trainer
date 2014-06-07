@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hatstick.blackjacktrainer.screens.MainMenuScreen;
+import com.hatstick.blackjacktrainer.screens.PlayBlackjackScreen;
 
 public class BlackjackTrainer extends Game {
 
@@ -21,7 +22,7 @@ public class BlackjackTrainer extends Game {
         batch = new SpriteBatch();
         //Use LibGDX's default Arial font.
         font = new BitmapFont();
-        this.setScreen(new MainMenuScreen(this));
+        this.setScreen(new PlayBlackjackScreen(this));
     }
 
     public void render() {

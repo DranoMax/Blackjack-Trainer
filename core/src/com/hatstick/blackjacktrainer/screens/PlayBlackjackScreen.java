@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -53,7 +54,6 @@ public class PlayBlackjackScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
-        camera.position.set(game.SCREEN_WIDTH/2, game.SCREEN_HEIGHT/2, 0f);      
         
         createGame();
         setupSprites();
@@ -62,7 +62,7 @@ public class PlayBlackjackScreen implements Screen {
     
     private void createGame() {
     	dealer = new Dealer();
-        cardTable = new CardTable(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
+        cardTable = new CardTable(dealer, game.SCREEN_WIDTH, game.SCREEN_HEIGHT, cardSize);
         
         players.add(new Player("Alex"));
    //     players.add(new Player("Andrew"));
@@ -94,15 +94,15 @@ public class PlayBlackjackScreen implements Screen {
 			}
     	});
     	
-    	table.add(hitButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/8);
-    	table.add(standButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/8);
+    	table.add(hitButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/10);
+    	table.add(standButton).width(game.SCREEN_WIDTH/10).height(game.SCREEN_HEIGHT/10);
     	stage.addActor(table);
     }
     
     private void loadCards() {
     	atlas = new TextureAtlas(Gdx.files.internal("cards/cards.pack"));
     	cardImages = new HashMap<String,Sprite>();
-    	cardSize.set(game.SCREEN_HEIGHT/(cardTable.getNumberPlayers()+1),game.SCREEN_HEIGHT/(cardTable.getNumberPlayers()+1));
+    	cardSize.set(game.SCREEN_WIDTH/(cardTable.getNumberPlayers()+3),game.SCREEN_HEIGHT/(cardTable.getNumberPlayers()+1));
     	
     	// Load all cards into a map of name -> image
     	// For now, we are simply scaling the image but we should find a
@@ -130,21 +130,38 @@ public class PlayBlackjackScreen implements Screen {
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);
 
+		// Draw Cards
 		game.batch.begin();
-		Sprite sprite = new Sprite();
+		drawCards();
+		game.batch.end();		
+		
+		stage.draw();
+		
+	}
+	
+	private void drawCards() {
+		
+		// Draw Player Cards
 		int spacer;
 		for( Player player : players) {
 			spacer = 0;
 			for( Card card : player.getHandArray()) {				
-				sprite = cardImages.get(card.getCard());
-				sprite.setPosition(player.getPosition().x+spacer, player.getPosition().y);
-				sprite.draw(game.batch);
+				cardImages.get(card.getCard()).setPosition(player.getPosition().x-cardSize.x/1.32f+spacer, player.getPosition().y-cardSize.y/1.09f);
+				cardImages.get(card.getCard()).draw(game.batch);
 
 				spacer += cardSize.x/10; 
 			}
 		}
-		game.batch.end();		
-		stage.draw();
+		
+		// Draw Dealer Cards
+		spacer = 0;
+		for( Card card : dealer.getHandArray() ) {
+			cardImages.get(card.getCard()).setPosition(dealer.getPosition().x-cardSize.x/1.32f+spacer, dealer.getPosition().y-cardSize.y/1.09f);
+			cardImages.get(card.getCard()).draw(game.batch);
+
+			spacer += cardSize.x/10;
+		}
+		
 	}
 
 	@Override
