@@ -25,7 +25,6 @@ public class ButtonFactory {
 	private BitmapFont font;
 	private TextButtonStyle buttonStyle;
 	
-	private ImageButtonStyle imageButtonStyle;
 	private ImageButtonStyle plusButtonStyle;
 	private ImageButtonStyle minusButtonStyle;
 	
@@ -100,4 +99,11 @@ public class ButtonFactory {
 		//table.debug();
     	return table;		
 	}
+	
+	public void dispose() {
+		buttonSkin.dispose();
+		buttonAtlas.dispose();
+		font.dispose();
+	}
+	
 }

@@ -31,6 +31,10 @@ public abstract class Player {
     public Hand getHand() {
     	return hand;
     }
+    
+    public void discardHand() {
+    	hand = new Hand();
+    }
 
     public void printHand() {
         System.out.print(name + " has ");
@@ -48,6 +52,10 @@ public abstract class Player {
     
     public int getChips() {
     	return chips;
+    }
+    
+    public void setChips(int value) {
+    	chips += value;
     }
     
     public int getBet() {

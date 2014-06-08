@@ -12,7 +12,6 @@ import com.hatstick.blackjacktrainer.BlackjackTrainer;
 public class MainMenuScreen implements Screen {
 
 	final BlackjackTrainer game;
-
 	private OrthographicCamera camera;
 
 	public MainMenuScreen(final BlackjackTrainer game) {

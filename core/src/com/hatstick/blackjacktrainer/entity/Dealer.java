@@ -15,6 +15,8 @@ public class Dealer {
 
 	// If it's player turn, show buttons for interacting
 	private boolean playerTurn = false;
+	// Has round started?
+	private boolean startedRound = false;
 
 	public Dealer() {
 		this.deck = new Deck();
@@ -27,12 +29,20 @@ public class Dealer {
 	 * @param players
 	 */
 	public void beginRound(ArrayList<Player> players) {
+		startedRound = true;
 		shuffle();
+		
+		// Reset player hands if haven't already
+		for (Player player : players) {
+			player.discardHand();
+		}
+		// New dealer hand
+		hand = new Hand();
 		deal(players);
 	}
 
 	/**
-	 * Perform each player's turn (humanplayer in a loop)
+	 * Perform each player's turn (HumanPlayer in a loop)
 	 * @param players
 	 */
 	public void continueRound(ArrayList<Player> players) {
@@ -47,7 +57,7 @@ public class Dealer {
 		}
 
 		// Dealer's turn
-		if (playerTurn == false) {
+		if (!playerTurn && startedRound) {
 			dealerTurn();
 			finishRound(players);
 		}
@@ -73,15 +83,18 @@ public class Dealer {
 				break;
 			}
 		}
+		startedRound = false;
 	}
 
 	/**
-	 * Player won blackjack!  Recieve bet 3:2
+	 * Player won blackjack!  Receive bet 3:2
 	 * @param player
 	 */
 	private void blackjack(Player player) {
 		player.getHand().printHand();
 		System.out.println("BLACKJACK!!");
+		// Round down
+		player.setChips((int)Math.floor(player.getBet()*1.5f));
 	}
 
 	private void checkForWin(Player player) {
@@ -89,22 +102,27 @@ public class Dealer {
 		// Check if Dealer busted
 		if (hand.getStatus() == Hand.BUST && player.getHand().getStatus() != Hand.BUST) {
 			System.out.println("Player wins!");
+			player.setChips(player.getBet());
 		}
 		// Else check the totals
 		else {
 			if (player.getHand().getTotal() > hand.getTotal()) {
 				System.out.println("Player wins!");
+				player.setChips(player.getBet());
 			}
 			else if (player.getHand().getTotal() == hand.getTotal()) {
 				System.out.println("PUSH");
 			}
 			else {
 				System.out.println("LOST!");
+				player.setChips(-player.getBet());
 			}
 		}
 	}
 
 	private void bustedHand(Player player) {
+		player.getHand().setStatus(Hand.BUST);
+		player.setChips(-player.getBet());
 		System.out.println("BUST!");
 	}
 
@@ -203,6 +221,10 @@ public class Dealer {
 
 	public Vector2 getPosition() {
 		return position;
+	}
+	
+	public boolean isRoundStarted() {
+		return startedRound;
 	}
 
 }

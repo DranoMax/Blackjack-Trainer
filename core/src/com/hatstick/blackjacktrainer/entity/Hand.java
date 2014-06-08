@@ -31,6 +31,9 @@ public class Hand {
     
     public void addCard(Card card) {
     	hand.add(card);
+    	if( getTotal() > 21 ) {
+    		setStatus(Hand.BUST);
+    	}
     }
     
     public int getTotal() {

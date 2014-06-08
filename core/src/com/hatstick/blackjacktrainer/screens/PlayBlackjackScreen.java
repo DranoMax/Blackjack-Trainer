@@ -52,7 +52,9 @@ public class PlayBlackjackScreen implements Screen {
 	private TextButton standButton;
 	private ImageButton betButton;
 
-	private Stage stage;
+	// In LibGdx, stages are used to display overlayed GUI
+	private Stage playerTurnStage;
+	private Stage newGameStage;
 
 	public PlayBlackjackScreen(final BlackjackTrainer game) {
 		this.game = game;
@@ -62,7 +64,6 @@ public class PlayBlackjackScreen implements Screen {
 
 		createGame();
 		setupSprites();
-		startGame();
 	}
 
 	private void createGame() {
@@ -82,18 +83,23 @@ public class PlayBlackjackScreen implements Screen {
 	}
 
 	private void setupButtons() {
+		setupPlayerTurnGUI();
+		setupNewRoundGUI();
+	}
 
+	private void setupPlayerTurnGUI() {
 		Table table = new Table();
 		table.setFillParent(true);
 		table.align(Align.bottom);
-		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);
+		playerTurnStage = new Stage();
+		Gdx.input.setInputProcessor(playerTurnStage);
 
 		standButton = buttonFactory.createButton("STAND", "stand", "stand_pressed");
 		standButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				players.get(0).getHand().setStatus(Hand.STAND);
+				System.out.println("STAND");
 			}
 		});
 		hitButton = buttonFactory.createButton("HIT", "hit", "hit_pressed");
@@ -101,18 +107,41 @@ public class PlayBlackjackScreen implements Screen {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				dealer.hit(players.get(0));
-				System.out.println(players.get(0).getHand().getTotal());   
+				System.out.println("HIT: " +players.get(0).getHand().getTotal());   
 			}
 		});
-		//betButton = buttonFactory.createBetButton();
-		Table test = buttonFactory.createBetButton((HumanPlayer)players.get(0));
 
-		
-		table.add(test).width(game.SCREEN_WIDTH/6).height(game.SCREEN_HEIGHT/8).expandX().right();
-		table.add(hitButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).right();
+		table.add(hitButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).expandX().right();
 		table.add(standButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).right();
-		stage.addActor(table);
+		playerTurnStage.addActor(table);
+	}
 
+	private void setupNewRoundGUI() {
+		Table table = new Table();
+		table.setFillParent(true);
+		table.align(Align.bottom);
+		newGameStage = new Stage();
+		Gdx.input.setInputProcessor(newGameStage);
+
+		// Bet Button
+		Table betButton = buttonFactory.createBetButton((HumanPlayer)players.get(0));
+		table.add(betButton).width(game.SCREEN_WIDTH/6).height(game.SCREEN_HEIGHT/8).expandX().right();
+
+		// Deal Button
+		TextButton dealButton = buttonFactory.createButton("DEAL", "plain", "plain_pressed");
+		dealButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				if (players.get(0).getBet() > 0) {
+					System.out.println("START");
+					startGame();
+				}
+			}
+		});
+
+		table.add(dealButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).right();
+
+		newGameStage.addActor(table);
 	}
 
 	private void loadCards() {
@@ -157,10 +186,18 @@ public class PlayBlackjackScreen implements Screen {
 		 * TODO: Move game logic out of render thread
 		 */
 		dealer.continueRound(players);
-		if (dealer.isPlayerTurn()) {
-			stage.draw();
-			Table.drawDebug(stage);
+
+		if (dealer.isRoundStarted()) {
+			if (dealer.isPlayerTurn()) {
+				Gdx.input.setInputProcessor(playerTurnStage);
+				playerTurnStage.draw();
+			}
 		}
+		else {
+			Gdx.input.setInputProcessor(newGameStage);
+			newGameStage.draw();
+		}
+
 	}
 
 	private void drawCards() {
@@ -220,7 +257,9 @@ public class PlayBlackjackScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-
+		atlas.dispose();
+		playerTurnStage.dispose();
+		newGameStage.dispose();
+		buttonFactory.dispose();
 	}
 }
