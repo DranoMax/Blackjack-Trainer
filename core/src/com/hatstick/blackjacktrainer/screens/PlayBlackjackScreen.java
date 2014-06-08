@@ -111,8 +111,8 @@ public class PlayBlackjackScreen implements Screen {
 			}
 		});
 
-		table.add(hitButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).expandX().right();
-		table.add(standButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).right();
+		table.add(standButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).expandX().right();
+		table.add(hitButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).right();
 		playerTurnStage.addActor(table);
 	}
 

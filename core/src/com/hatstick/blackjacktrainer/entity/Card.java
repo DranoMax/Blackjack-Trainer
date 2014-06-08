@@ -5,86 +5,95 @@ package com.hatstick.blackjacktrainer.entity;
  */
 public class Card {
 
-    private final String suit;
-    private final String name;
-    private final int value;
-    private int size = 0;
+	private final String suit;
+	private final String name;
+	private final int value;
+	private int size = 0;
 
-    enum SUIT {HEARTS, SPADES, CLUBS, DIAMONDS};
-    enum NAME {KING, QUEEN, JACK, ACE, NONE};
+	enum SUIT {HEARTS, SPADES, CLUBS, DIAMONDS};
+	enum NAME {KING, QUEEN, JACK, ACE, NONE};
 
-    public Card(SUIT suit, NAME name, int value) {
-        this.suit = getSuitString(suit);
-        this.name = getNameString(name);
-        this.value = value;
-    }
+	public Card(SUIT suit, NAME name, int value) {
+		this.suit = getSuitString(suit);
+		this.name = getNameString(name);
+		this.value = value;
+	}
 
-    private String getSuitString(SUIT suit) {
-        switch(suit) {
-            case HEARTS:
-                return "hearts";
-            case SPADES:
-                return "spades";
-            case CLUBS:
-                return "clubs";
-            case DIAMONDS:
-                return "diamonds";
-            default:
-                return null;
-        }
-    }
+	private String getSuitString(SUIT suit) {
+		switch(suit) {
+		case HEARTS:
+			return "hearts";
+		case SPADES:
+			return "spades";
+		case CLUBS:
+			return "clubs";
+		case DIAMONDS:
+			return "diamonds";
+		default:
+			return null;
+		}
+	}
 
-    private String getNameString(NAME name) {
-        switch(name) {
-            case ACE:
-                return "ace";
-            case JACK:
-                return "jack";
-            case QUEEN:
-                return "queen";
-            case KING:
-                return "king";
-            default:
-                return null;
-        }
-    }
+	private String getNameString(NAME name) {
+		switch(name) {
+		case ACE:
+			return "ace";
+		case JACK:
+			return "jack";
+		case QUEEN:
+			return "queen";
+		case KING:
+			return "king";
+		default:
+			return null;
+		}
+	}
 
-    public String getCard() {
-    	if( name != null ) {
-            return (name + "_of_" + suit);
-        }
-        else {
-            return (value + "_of_" + suit);
-        }
-    }
-    
-    public void printCard() {
-        if( name != null ) {
-            System.out.print(name + "_of_" + suit);
-        }
-        else {
-            System.out.print(value + "_of_" + suit);
-        }
-    }
+	public String getCard() {
+		if( name != null ) {
+			return (name + "_of_" + suit);
+		}
+		else {
+			return (value + "_of_" + suit);
+		}
+	}
 
-    public String getSuit() {
-        return suit;
-    }
+	public void printCard() {
+		if( name != null ) {
+			System.out.print(name + "_of_" + suit);
+		}
+		else {
+			System.out.print(value + "_of_" + suit);
+		}
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getSuit() {
+		return suit;
+	}
 
-    public int getValue() {
-        return value;
-    }
-    
-    public void setSize(int i) {
-    	size = i;
-    }
-    
-    public int getSize() {
-    	return size;
-    }
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Handles case that face name is "Ace"
+	 * @param total
+	 * @return
+	 */
+	public int getValue(int total) {
+		if( name != null && name.equals("ace") && total+11 <= 21 ) {
+			return 11;
+		} else {
+			return value;
+		}
+	}
+
+	public void setSize(int i) {
+		size = i;
+	}
+
+	public int getSize() {
+		return size;
+	}
 
 }

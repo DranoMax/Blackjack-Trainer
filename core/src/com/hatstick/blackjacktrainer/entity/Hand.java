@@ -39,7 +39,7 @@ public class Hand {
     public int getTotal() {
     	int total = 0;
     	for( Card card : hand ) { 
-    		total += card.getValue();
+    		total += card.getValue(total);
     	}
     	return total;
     }
