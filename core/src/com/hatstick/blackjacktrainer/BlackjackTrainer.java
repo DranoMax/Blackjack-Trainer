@@ -18,6 +18,7 @@ public class BlackjackTrainer extends Game {
     
     // Animation/Tweening
  	public static TweenManager tweenManager;
+ 	public static float tweenSpeed = 0.5f;
 
     public void create() {
         batch = new SpriteBatch();

@@ -1,6 +1,7 @@
 package com.hatstick.blackjacktrainer.entity;
 
 import com.badlogic.gdx.math.Vector2;
+import com.hatstick.blackjacktrainer.BlackjackTrainer;
 
 /**
  * Created by Alex on 5/31/2014.
@@ -21,7 +22,7 @@ public class Card {
 		this.suit = getSuitString(suit);
 		this.name = getNameString(name);
 		this.value = value;
-		position = new Vector2();
+		position = new Vector2(BlackjackTrainer.SCREEN_WIDTH/3, BlackjackTrainer.SCREEN_HEIGHT);
 	}
 
 	private String getSuitString(SUIT suit) {

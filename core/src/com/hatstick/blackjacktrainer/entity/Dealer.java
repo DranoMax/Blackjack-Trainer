@@ -22,7 +22,7 @@ public class Dealer {
 	private boolean playerTurn = false;
 	// Has round started?
 	private boolean startedRound = false;
-	
+
 	private BlackjackTrainer game;
 
 	public Dealer(BlackjackTrainer game) {
@@ -39,7 +39,7 @@ public class Dealer {
 	public void beginRound(ArrayList<Player> players) {
 		startedRound = true;
 		shuffle();
-		
+
 		// Reset player hands if haven't already
 		for (Player player : players) {
 			player.discardHand();
@@ -168,16 +168,14 @@ public class Dealer {
 
 	// Start of the game dealing
 	public void deal(ArrayList<Player> players) {
-		
+
 		for (int i = 0; i < 2; i++) {
 			for (Player player : players) {
 				hit(player);
 			}
 			// Draw card for dealer
 			Card card = deck.drawCard();
-			Tween.to(deck.drawCard(),CardAccessor.POSITION_XY, 1.0f)
-			.target(100,100)
-			.start(game.tweenManager);
+			tweenCard(card,getPosition());
 			hand.getHand().add(card);
 		}
 		checkForBlackjack(players);
@@ -199,12 +197,23 @@ public class Dealer {
 	public void hit(Player player) {
 		Hand hand = player.getHand();
 		if (hand.getStatus() == Hand.OPEN) {
-			hand.addCard(deck.drawCard());
+
+			Card card = deck.drawCard();
+			tweenCard(card, player.getPosition());
+			hand.getHand().add(card);
+
 			if (hand.getTotal() > 21) {
 				hand.setStatus(Hand.BUST);
 			}
 		}
 	}	
+
+	private void tweenCard(Card card, Vector2 pos) {
+		// Animate card
+		Tween.to(card,CardAccessor.POSITION_XY, BlackjackTrainer.tweenSpeed)
+		.target(pos.x,pos.y)
+		.start(BlackjackTrainer.tweenManager);
+	}
 
 	// Check for winners
 	public void checkHands(ArrayList<Player> players) {
@@ -235,7 +244,7 @@ public class Dealer {
 	public Vector2 getPosition() {
 		return position;
 	}
-	
+
 	public boolean isRoundStarted() {
 		return startedRound;
 	}

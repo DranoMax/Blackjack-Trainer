@@ -210,7 +210,7 @@ public class PlayBlackjackScreen implements Screen {
 		}
 
 		// Update tweening
-		game.tweenManager.update(delta);
+		BlackjackTrainer.tweenManager.update(delta);
 	}
 
 	private void drawCards() {
@@ -220,7 +220,7 @@ public class PlayBlackjackScreen implements Screen {
 		for( Player player : players) {
 			spacer = 0;
 			for( Card card : player.getHandArray()) {	
-				cardImages.get(card.getCard()).setPosition(player.getPosition().x+spacer, player.getPosition().y-cardSize.y);
+				cardImages.get(card.getCard()).setPosition(card.getPosition().x+spacer, card.getPosition().y-cardSize.y);
 				cardImages.get(card.getCard()).draw(game.batch);
 
 				spacer += cardSize.x/10; 
@@ -230,7 +230,7 @@ public class PlayBlackjackScreen implements Screen {
 		// Draw Dealer Cards
 		spacer = 0;
 		for( Card card : dealer.getHandArray() ) {
-			cardImages.get(card.getCard()).setPosition(dealer.getPosition().x-cardSize.x/1.32f+spacer, dealer.getPosition().y-cardSize.y/1.09f);
+			cardImages.get(card.getCard()).setPosition(card.getPosition().x-cardSize.x/1.32f+spacer, card.getPosition().y-cardSize.y/1.09f);
 			cardImages.get(card.getCard()).draw(game.batch);
 
 			spacer += cardSize.x/10;
