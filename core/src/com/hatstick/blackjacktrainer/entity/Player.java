@@ -58,6 +58,10 @@ public abstract class Player {
     	chips += value;
     }
     
+    public void setBet(int bet) {
+    	this.currentBet = bet;
+    }
+    
     public int getBet() {
     	return currentBet;
     }

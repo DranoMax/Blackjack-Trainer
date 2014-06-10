@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenManager;
+
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -32,6 +36,7 @@ import com.hatstick.blackjacktrainer.entity.HumanPlayer;
 import com.hatstick.blackjacktrainer.entity.Player;
 import com.hatstick.blackjacktrainer.entity.CardTable;
 import com.hatstick.blackjacktrainer.factory.ButtonFactory;
+import com.hatstick.blackjacktrainer.tween.CardAccessor;
 
 public class PlayBlackjackScreen implements Screen {
 
@@ -47,7 +52,7 @@ public class PlayBlackjackScreen implements Screen {
 	private CardTable cardTable;
 
 	// Buttons
-	private ButtonFactory buttonFactory = new ButtonFactory();
+	private ButtonFactory buttonFactory;
 	private TextButton hitButton;
 	private TextButton standButton;
 	private ImageButton betButton;
@@ -64,11 +69,13 @@ public class PlayBlackjackScreen implements Screen {
 
 		createGame();
 		setupSprites();
+		setupTweening();
 	}
 
 	private void createGame() {
-		dealer = new Dealer();
+		dealer = new Dealer(game);
 		cardTable = new CardTable(dealer, game.SCREEN_WIDTH, game.SCREEN_HEIGHT, cardSize);
+		buttonFactory = new ButtonFactory(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 
 		players.add(new HumanPlayer("Alex"));
 		//       players.add(new ComputerPlayer("Andrew"));
@@ -80,6 +87,10 @@ public class PlayBlackjackScreen implements Screen {
 	private void setupSprites() {
 		setupButtons();
 		loadCards();
+	}
+	
+	private void setupTweening() {
+		Tween.registerAccessor(Card.class, new CardAccessor());
 	}
 
 	private void setupButtons() {
@@ -125,7 +136,7 @@ public class PlayBlackjackScreen implements Screen {
 
 		// Bet Button
 		Table betButton = buttonFactory.createBetButton((HumanPlayer)players.get(0));
-		table.add(betButton).width(game.SCREEN_WIDTH/6).height(game.SCREEN_HEIGHT/8).expandX().right();
+		table.add(betButton).width((game.SCREEN_WIDTH/6)*Gdx.graphics.getDensity()).height((game.SCREEN_HEIGHT/8)*Gdx.graphics.getDensity()).expandX().right();
 
 		// Deal Button
 		TextButton dealButton = buttonFactory.createButton("DEAL", "plain", "plain_pressed");
@@ -139,7 +150,7 @@ public class PlayBlackjackScreen implements Screen {
 			}
 		});
 
-		table.add(dealButton).width(game.SCREEN_WIDTH/8).height(game.SCREEN_HEIGHT/8).right();
+		table.add(dealButton).width((game.SCREEN_WIDTH/8)*Gdx.graphics.getDensity()).height((game.SCREEN_HEIGHT/8)*Gdx.graphics.getDensity()).right();
 
 		newGameStage.addActor(table);
 	}
@@ -198,6 +209,8 @@ public class PlayBlackjackScreen implements Screen {
 			newGameStage.draw();
 		}
 
+		// Update tweening
+		game.tweenManager.update(delta);
 	}
 
 	private void drawCards() {

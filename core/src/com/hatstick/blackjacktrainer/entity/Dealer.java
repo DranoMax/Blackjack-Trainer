@@ -2,7 +2,12 @@ package com.hatstick.blackjacktrainer.entity;
 
 import java.util.ArrayList;
 
+import aurelienribon.tweenengine.Tween;
+
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.math.Vector2;
+import com.hatstick.blackjacktrainer.BlackjackTrainer;
+import com.hatstick.blackjacktrainer.tween.CardAccessor;
 
 /**
  * Created by Alex on 5/31/2014.
@@ -17,11 +22,14 @@ public class Dealer {
 	private boolean playerTurn = false;
 	// Has round started?
 	private boolean startedRound = false;
+	
+	private BlackjackTrainer game;
 
-	public Dealer() {
+	public Dealer(BlackjackTrainer game) {
 		this.deck = new Deck();
 		this.hand = new Hand();
 		this.position = new Vector2();
+		this.game = game;
 	}
 
 	/**
@@ -160,12 +168,17 @@ public class Dealer {
 
 	// Start of the game dealing
 	public void deal(ArrayList<Player> players) {
+		
 		for (int i = 0; i < 2; i++) {
 			for (Player player : players) {
 				hit(player);
 			}
 			// Draw card for dealer
-			hand.getHand().add(deck.drawCard());
+			Card card = deck.drawCard();
+			Tween.to(deck.drawCard(),CardAccessor.POSITION_XY, 1.0f)
+			.target(100,100)
+			.start(game.tweenManager);
+			hand.getHand().add(card);
 		}
 		checkForBlackjack(players);
 	}

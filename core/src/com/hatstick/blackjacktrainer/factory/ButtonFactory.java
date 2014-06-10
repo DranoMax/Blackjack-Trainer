@@ -30,12 +30,18 @@ public class ButtonFactory {
 	
 	private Label currentBet;
 	
+	private int screenWidth;
+	private int screenHeight;
 	
-	public ButtonFactory() {
+	
+	public ButtonFactory(int screenWidth, int screenHeight) {
 		buttonSkin = new Skin();
 		buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.pack"));
 		buttonSkin.addRegions(buttonAtlas);
 		font = new BitmapFont();
+		
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
 	}
 	
 	public TextButton createButton(String text, String released, String pressed) {
@@ -64,7 +70,7 @@ public class ButtonFactory {
 		Skin uiSkin = new Skin(Gdx.files.internal("uiskin.json"));
 		currentBet = new Label("dkl", uiSkin);
 		currentBet.setText("0");
-		table.add(currentBet).expandX().left().padLeft(15);
+		table.add(currentBet).expandX().left().padLeft(20);
 		
 		// PLUS Button
 		plusButtonStyle = new ImageButtonStyle();
@@ -78,7 +84,7 @@ public class ButtonFactory {
 				currentBet.setText(String.valueOf(player.getBet()));
 			}
 		});
-		table.add(plus).right().padRight(5f).padBottom(5f);
+		table.add(plus).width((screenWidth/32)*Gdx.graphics.getDensity()).height((screenHeight/22)*Gdx.graphics.getDensity()).right().padBottom(5f).padRight(5f);
 		
 		// MINUS Button
 		minusButtonStyle = new ImageButtonStyle();
@@ -95,7 +101,7 @@ public class ButtonFactory {
 		
 		table.row();
 		table.add();
-		table.add(minus).expandX().right().padRight(5f);
+		table.add(minus).width((screenWidth/32)*Gdx.graphics.getDensity()).height((screenHeight/22)*Gdx.graphics.getDensity()).expandX().right().padRight(5f);
 		//table.debug();
     	return table;		
 	}

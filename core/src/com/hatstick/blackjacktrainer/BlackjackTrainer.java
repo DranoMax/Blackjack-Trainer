@@ -1,5 +1,7 @@
 package com.hatstick.blackjacktrainer;
 
+import aurelienribon.tweenengine.TweenManager;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,11 +15,15 @@ public class BlackjackTrainer extends Game {
     
     public static final int SCREEN_WIDTH = 1000;
     public static final int SCREEN_HEIGHT = 600;
+    
+    // Animation/Tweening
+ 	public static TweenManager tweenManager;
 
     public void create() {
         batch = new SpriteBatch();
         //Use LibGDX's default Arial font.
         font = new BitmapFont();
+        tweenManager = new TweenManager();
         this.setScreen(new PlayBlackjackScreen(this));
     }
 

@@ -1,5 +1,7 @@
 package com.hatstick.blackjacktrainer.entity;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * Created by Alex on 5/31/2014.
  */
@@ -9,6 +11,8 @@ public class Card {
 	private final String name;
 	private final int value;
 	private int size = 0;
+	
+	private Vector2 position;
 
 	enum SUIT {HEARTS, SPADES, CLUBS, DIAMONDS};
 	enum NAME {KING, QUEEN, JACK, ACE, NONE};
@@ -17,6 +21,7 @@ public class Card {
 		this.suit = getSuitString(suit);
 		this.name = getNameString(name);
 		this.value = value;
+		position = new Vector2();
 	}
 
 	private String getSuitString(SUIT suit) {
@@ -94,6 +99,18 @@ public class Card {
 
 	public int getSize() {
 		return size;
+	}
+	
+	public void setPosition(Vector2 pos) {
+		position.set(pos);
+	}
+	
+	public void setPosition(float x, float y) {
+		position.set(x,y);
+	}
+	
+	public Vector2 getPosition() {
+		return position;
 	}
 
 }
