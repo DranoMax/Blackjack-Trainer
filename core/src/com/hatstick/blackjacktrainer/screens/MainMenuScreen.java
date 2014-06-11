@@ -4,9 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.hatstick.blackjacktrainer.BlackjackTrainer;
 
 public class MainMenuScreen implements Screen {
@@ -18,7 +15,7 @@ public class MainMenuScreen implements Screen {
 		this.game = game;
 
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
+	//	camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 	}
 
 	@Override

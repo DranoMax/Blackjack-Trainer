@@ -13,10 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
-import com.hatstick.blackjacktrainer.entity.Hand;
+import com.hatstick.blackjacktrainer.BlackjackTrainer;
 import com.hatstick.blackjacktrainer.entity.HumanPlayer;
-import com.hatstick.blackjacktrainer.entity.Player;
 
 public class ButtonFactory {
 	
@@ -29,19 +27,12 @@ public class ButtonFactory {
 	private ImageButtonStyle minusButtonStyle;
 	
 	private Label currentBet;
-	
-	private int screenWidth;
-	private int screenHeight;
-	
-	
-	public ButtonFactory(int screenWidth, int screenHeight) {
+		
+	public ButtonFactory() {
 		buttonSkin = new Skin();
 		buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.pack"));
 		buttonSkin.addRegions(buttonAtlas);
 		font = new BitmapFont();
-		
-		this.screenWidth = screenWidth;
-		this.screenHeight = screenHeight;
 	}
 	
 	public TextButton createButton(String text, String released, String pressed) {
@@ -84,7 +75,7 @@ public class ButtonFactory {
 				currentBet.setText(String.valueOf(player.getBet()));
 			}
 		});
-		table.add(plus).width((screenWidth/32)*Gdx.graphics.getDensity()).height((screenHeight/22)*Gdx.graphics.getDensity()).right().padBottom(5f).padRight(5f);
+		table.add(plus).width(BlackjackTrainer.SCREEN_WIDTH/32).height(BlackjackTrainer.SCREEN_HEIGHT/22).right().padBottom(5f).padRight(5f);
 		
 		// MINUS Button
 		minusButtonStyle = new ImageButtonStyle();
@@ -101,7 +92,7 @@ public class ButtonFactory {
 		
 		table.row();
 		table.add();
-		table.add(minus).width((screenWidth/32)*Gdx.graphics.getDensity()).height((screenHeight/22)*Gdx.graphics.getDensity()).expandX().right().padRight(5f);
+		table.add(minus).width(BlackjackTrainer.SCREEN_WIDTH/32).height(BlackjackTrainer.SCREEN_HEIGHT/22).expandX().right().padRight(5f);
 		//table.debug();
     	return table;		
 	}

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import aurelienribon.tweenengine.Tween;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.math.Vector2;
 import com.hatstick.blackjacktrainer.BlackjackTrainer;
 import com.hatstick.blackjacktrainer.tween.CardAccessor;
@@ -23,13 +22,10 @@ public class Dealer {
 	// Has round started?
 	private boolean startedRound = false;
 
-	private BlackjackTrainer game;
-
-	public Dealer(BlackjackTrainer game) {
+	public Dealer() {
 		this.deck = new Deck();
 		this.hand = new Hand();
 		this.position = new Vector2();
-		this.game = game;
 	}
 
 	/**
