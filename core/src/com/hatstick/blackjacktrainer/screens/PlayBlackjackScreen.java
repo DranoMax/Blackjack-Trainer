@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.hatstick.blackjacktrainer.BlackjackTrainer;
 import com.hatstick.blackjacktrainer.entity.Card;
+import com.hatstick.blackjacktrainer.entity.ComputerPlayer;
 import com.hatstick.blackjacktrainer.entity.Dealer;
 import com.hatstick.blackjacktrainer.entity.Hand;
 import com.hatstick.blackjacktrainer.entity.HumanPlayer;
@@ -69,10 +70,10 @@ public class PlayBlackjackScreen implements Screen {
 		buttonFactory = new ButtonFactory();
 
 		players.add(new HumanPlayer("Alex"));
-		//       players.add(new ComputerPlayer("Andrew"));
+		       players.add(new ComputerPlayer("Andrew"));
 
 		cardTable.sitDown(players.get(0));
-		//       cardTable.sitDown(players.get(1));
+		       cardTable.sitDown(players.get(1));
 	}
 
 	private void setupSprites() {
@@ -210,23 +211,25 @@ public class PlayBlackjackScreen implements Screen {
 		// Draw Player Cards
 		// Spacer used to place cards on top of each other
 		int spacer;
+		Sprite sprite;
 		for( Player player : players) {
 			spacer = 0;
-			for( Card card : player.getHandArray()) {	
-				cardImages.get(card.getCard()).setPosition(card.getPosition().x+spacer, card.getPosition().y);
-				cardImages.get(card.getCard()).draw(game.batch);
-				System.out.println("CARD POS " + cardImages.get(card.getCard()).getX());
-				spacer += cardImages.get(card.getCard()).getWidth()/10; 
+			for( Card card : player.getHandArray()) {
+				sprite = cardImages.get(card.getCard());
+				sprite.setPosition(card.getPosition().x+spacer, card.getPosition().y);
+				sprite.draw(game.batch);
+				spacer += sprite.getWidth()/20; 
 			}
 		}
 
 		// Draw Dealer Cards
 		spacer = 0;
 		for( Card card : dealer.getHandArray() ) {
-			cardImages.get(card.getCard()).setPosition(card.getPosition().x+spacer, card.getPosition().y);
-			cardImages.get(card.getCard()).draw(game.batch);
+			sprite = cardImages.get(card.getCard());
+			sprite.setPosition(card.getPosition().x+spacer, card.getPosition().y);
+			sprite.draw(game.batch);
 
-			spacer += cardSize.x/10;
+			spacer += sprite.getWidth()/20;
 		}
 
 	}

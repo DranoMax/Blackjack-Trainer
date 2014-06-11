@@ -30,15 +30,12 @@ public class CardTable {
 			seats.add(player);
 
 			// Use spacer+TABLE_SIZE to divide us up some even spacing
-			// TODO: 1.75f is a number found to look good - should be something independent instead.
 			int spacer = 0;
 			for( Player plyr : seats ) {
-				plyr.setPosition(new Vector2(BlackjackTrainer.SCREEN_WIDTH/(getNumberPlayers()+1)-spacer,0));
-				System.out.println("PLAYER POS: " + plyr.getPosition());
-				spacer += BlackjackTrainer.SCREEN_WIDTH/TABLE_SIZE;
 				cardSize.set(BlackjackTrainer.SCREEN_WIDTH/(getNumberPlayers()+5),BlackjackTrainer.SCREEN_HEIGHT/(getNumberPlayers()+1));
+				plyr.setPosition(new Vector2(BlackjackTrainer.SCREEN_WIDTH/(getNumberPlayers()+1)-cardSize.x/4-spacer,0));
+				spacer += BlackjackTrainer.SCREEN_WIDTH/TABLE_SIZE;
 				dealer.setPosition(new Vector2(BlackjackTrainer.SCREEN_WIDTH/2-cardSize.x/4,BlackjackTrainer.SCREEN_HEIGHT-cardSize.y/1.5f));
-				System.out.println("SIZE: " + cardSize);
 			}
 		}
 	}
