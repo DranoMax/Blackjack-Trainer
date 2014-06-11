@@ -157,8 +157,12 @@ public class Dealer {
 
 	public void dealerTurn() {
 
+		Card card;
 		while (hand.getTotal() < 17 && hand.getStatus() != Hand.BUST) {
-			hand.addCard(deck.drawCard());
+			card = deck.drawCard();
+			if (card != null) {
+				hand.addCard(deck.drawCard());
+			}
 		}
 	}
 
@@ -175,8 +179,10 @@ public class Dealer {
 			}
 			// Draw card for dealer
 			Card card = deck.drawCard();
-			tweenCard(card,getPosition());
-			hand.getHand().add(card);
+			if (card != null) {
+				tweenCard(card,getPosition());
+				hand.getHand().add(card);
+			}
 		}
 		checkForBlackjack(players);
 	}
@@ -199,11 +205,13 @@ public class Dealer {
 		if (hand.getStatus() == Hand.OPEN) {
 
 			Card card = deck.drawCard();
-			tweenCard(card, player.getPosition());
-			hand.getHand().add(card);
+			if  (card != null) {
+				tweenCard(card, player.getPosition());
+				hand.getHand().add(card);
 
-			if (hand.getTotal() > 21) {
-				hand.setStatus(Hand.BUST);
+				if (hand.getTotal() > 21) {
+					hand.setStatus(Hand.BUST);
+				}
 			}
 		}
 	}	
