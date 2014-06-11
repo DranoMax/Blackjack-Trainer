@@ -16,6 +16,7 @@ public abstract class Player {
  	private Vector2 seatPosition;
  	
  	private int currentBet;
+ 	private boolean finishedTurn = false;
 
     public Player(String name) {
         this.chips = 100;
@@ -82,5 +83,21 @@ public abstract class Player {
     	else {
     		currentBet = 0;
     	}
+    }
+    
+    public void setName(String name) {
+    	this.name = name;
+    }
+    
+    public String getName() {
+    	return name;
+    }
+    
+    public void setFinishedTurn(boolean finished) {
+    	finishedTurn = finished;
+    }
+    
+    public boolean isTurnFinished() {
+    	return finishedTurn;
     }
 }

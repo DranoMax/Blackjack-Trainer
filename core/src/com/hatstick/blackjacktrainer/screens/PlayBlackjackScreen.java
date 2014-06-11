@@ -70,10 +70,10 @@ public class PlayBlackjackScreen implements Screen {
 		buttonFactory = new ButtonFactory();
 
 		players.add(new HumanPlayer("Alex"));
-		       players.add(new ComputerPlayer("Andrew"));
+		players.add(new ComputerPlayer("Andrew"));
 
 		cardTable.sitDown(players.get(0));
-		       cardTable.sitDown(players.get(1));
+		cardTable.sitDown(players.get(1));
 	}
 
 	private void setupSprites() {
@@ -108,7 +108,7 @@ public class PlayBlackjackScreen implements Screen {
 		hitButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				dealer.hit(players.get(0));;   
+				dealer.hit(players.get(0));
 			}
 		});
 
@@ -159,7 +159,6 @@ public class PlayBlackjackScreen implements Screen {
 	}
 
 	private void startGame() {
-
 		dealer.beginRound(players);
 
 		for( Player player : players) {
@@ -185,15 +184,14 @@ public class PlayBlackjackScreen implements Screen {
 		/**
 		 * TODO: Move game logic out of render thread
 		 */
-		dealer.continueRound(players);
-
+		
 		if (dealer.isRoundStarted()) {
+			dealer.continueRound(players);
 			if (dealer.isPlayerTurn()) {
 				Gdx.input.setInputProcessor(playerTurnStage);
 				playerTurnStage.draw();
 			}
-		}
-		else {
+		} else {
 			Gdx.input.setInputProcessor(newGameStage);
 			newGameStage.draw();
 		}

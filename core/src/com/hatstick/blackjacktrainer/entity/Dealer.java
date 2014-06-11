@@ -39,6 +39,7 @@ public class Dealer {
 		// Reset player hands if haven't already
 		for (Player player : players) {
 			player.discardHand();
+			player.setFinishedTurn(false);
 		}
 		// New dealer hand
 		hand = new Hand();
@@ -52,11 +53,14 @@ public class Dealer {
 	public void continueRound(ArrayList<Player> players) {
 		// Now each player takes their turn
 		for (Player player : players) {
-			if (player instanceof ComputerPlayer) {
-				playerTurn((ComputerPlayer)player);
-			}
-			else {
-				playerTurn((HumanPlayer)player);
+			// Have they already finished their turn?
+			if (!player.isTurnFinished()) {
+				if (player instanceof ComputerPlayer) {
+					playerTurn((ComputerPlayer)player);
+				}
+				else {
+					playerTurn((HumanPlayer)player);
+				}
 			}
 		}
 
@@ -132,7 +136,6 @@ public class Dealer {
 
 	public void playerTurn(ComputerPlayer player) {
 		// Player logic - simple - draw till >= 17
-		playerTurn = false;
 		Hand hand = player.getHand();
 		while (hand.getTotal() < 17 && hand.getStatus() != Hand.BUST) {
 			hit(player);
@@ -141,13 +144,14 @@ public class Dealer {
 		if (hand.getStatus() != Hand.BUST) {
 			hand.setStatus(Hand.STAND);
 		}
-
+		player.setFinishedTurn(true);
 	}
 
 	public void playerTurn(HumanPlayer player) {
 		playerTurn = true;
 		if (player.getHand().getStatus() != Hand.OPEN) {
 			playerTurn = false;
+			player.setFinishedTurn(true);
 		}
 	}
 
