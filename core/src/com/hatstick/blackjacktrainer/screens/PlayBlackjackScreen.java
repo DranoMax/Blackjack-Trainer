@@ -38,7 +38,8 @@ public class PlayBlackjackScreen implements Screen {
 	private OrthographicCamera camera;
 	private TextureAtlas atlas;
 	private Map<String,Sprite> cardImages;
-	private Vector2 cardSize = new Vector2();
+	public static Vector2 cardSize = new Vector2();
+	private float cardScale;
 
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private Dealer dealer;
@@ -66,7 +67,7 @@ public class PlayBlackjackScreen implements Screen {
 
 	private void createGame() {
 		dealer = new Dealer();
-		cardTable = new CardTable(dealer, cardSize);
+		cardTable = new CardTable(dealer);
 		buttonFactory = new ButtonFactory();
 
 		players.add(new HumanPlayer("Alex"));
@@ -108,7 +109,7 @@ public class PlayBlackjackScreen implements Screen {
 		hitButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				dealer.hit(players.get(0));
+				dealer.hit(players.get(0), 0);
 			}
 		});
 
@@ -139,14 +140,15 @@ public class PlayBlackjackScreen implements Screen {
 			}
 		});
 
-		table.add(dealButton).width(BlackjackTrainer.SCREEN_WIDTH/6).height(BlackjackTrainer.SCREEN_HEIGHT/8).right();
+		table.add(dealButton).width(BlackjackTrainer.SCREEN_WIDTH/8).height(BlackjackTrainer.SCREEN_HEIGHT/8).right();
 		newGameStage.addActor(table);
 	}
 
 	private void loadCards() {
 		atlas = new TextureAtlas(Gdx.files.internal("cards/cards.pack"));
 		cardImages = new HashMap<String,Sprite>();
-		cardSize.set(BlackjackTrainer.SCREEN_WIDTH/(cardTable.getNumberPlayers()+3),BlackjackTrainer.SCREEN_HEIGHT/(cardTable.getNumberPlayers()+1));
+		
+		cardScale = 1-.2f*(cardTable.getNumberPlayers()-1);
 
 		// Load all cards into a map of name -> image
 		// For now, we are simply scaling the image but we should find a
@@ -154,8 +156,9 @@ public class PlayBlackjackScreen implements Screen {
 		for( AtlasRegion region : atlas.getRegions()) {
 			cardImages.put(region.name, atlas.createSprite(region.name));
 			cardImages.get(region.name).setOrigin(0,0);
-			cardImages.get(region.name).setScale(cardSize.x/region.getTexture().getWidth());
+			cardImages.get(region.name).setScale(cardScale);
 		}
+		cardSize.set(cardImages.get("ace_of_spades").getWidth(),cardImages.get("ace_of_spades").getWidth());
 	}
 
 	private void startGame() {
@@ -201,7 +204,7 @@ public class PlayBlackjackScreen implements Screen {
 		}
 
 		// Update tweening
-		BlackjackTrainer.tweenManager.update(delta);
+		BlackjackTrainer.tweenManager.update(delta*2);
 	}
 
 	private void drawCards() {
@@ -216,7 +219,7 @@ public class PlayBlackjackScreen implements Screen {
 				sprite = cardImages.get(card.getCard());
 				sprite.setPosition(card.getPosition().x+spacer, card.getPosition().y);
 				sprite.draw(game.batch);
-				spacer += sprite.getWidth()/20; 
+				spacer += sprite.getWidth()/6; 
 			}
 		}
 
@@ -227,7 +230,7 @@ public class PlayBlackjackScreen implements Screen {
 			sprite.setPosition(card.getPosition().x+spacer, card.getPosition().y);
 			sprite.draw(game.batch);
 
-			spacer += sprite.getWidth()/20;
+			spacer += sprite.getWidth()/6;
 		}
 
 	}

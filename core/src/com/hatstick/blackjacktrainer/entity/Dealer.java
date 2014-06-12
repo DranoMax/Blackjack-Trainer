@@ -56,7 +56,10 @@ public class Dealer {
 			// Have they already finished their turn?
 			if (!player.isTurnFinished()) {
 				if (player instanceof ComputerPlayer) {
-					playerTurn((ComputerPlayer)player);
+					// Wait between each hit!
+					if (BlackjackTrainer.tweenManager.getRunningTweensCount() == 0) {
+						playerTurn((ComputerPlayer)player);
+					}
 				}
 				else {
 					playerTurn((HumanPlayer)player);
@@ -137,8 +140,10 @@ public class Dealer {
 	public void playerTurn(ComputerPlayer player) {
 		// Player logic - simple - draw till >= 17
 		Hand hand = player.getHand();
+		int timer = 0;
 		while (hand.getTotal() < 17 && hand.getStatus() != Hand.BUST) {
-			hit(player);
+			hit(player, timer);
+			timer += BlackjackTrainer.tweenTimer;
 		}
 		// If we didn't bust, stand.
 		if (hand.getStatus() != Hand.BUST) {
@@ -173,15 +178,19 @@ public class Dealer {
 	// Start of the game dealing
 	public void deal(ArrayList<Player> players) {
 
+		// Used for animating so everything doesn't animate all at once
+		int timer = 0;
 		for (int i = 0; i < 2; i++) {
 			for (Player player : players) {
-				hit(player);
+				hit(player, timer);
+				timer += BlackjackTrainer.tweenTimer;
 			}
 			// Draw card for dealer
 			Card card = deck.drawCard();
 			if (card != null) {
-				tweenCard(card,getPosition());
+				tweenCard(card,getPosition(), timer);
 				hand.getHand().add(card);
+				timer += BlackjackTrainer.tweenTimer;
 			}
 		}
 		checkForBlackjack(players);
@@ -200,13 +209,13 @@ public class Dealer {
 	}
 
 	// "Hit me"
-	public void hit(Player player) {
+	public void hit(Player player, int timer) {
 		Hand hand = player.getHand();
 		if (hand.getStatus() == Hand.OPEN) {
 
 			Card card = deck.drawCard();
 			if  (card != null) {
-				tweenCard(card, player.getPosition());
+				tweenCard(card, player.getPosition(), timer);
 				hand.getHand().add(card);
 
 				if (hand.getTotal() > 21) {
@@ -216,10 +225,11 @@ public class Dealer {
 		}
 	}	
 
-	private void tweenCard(Card card, Vector2 pos) {
+	private void tweenCard(Card card, Vector2 pos, int timer) {
 		// Animate card
 		Tween.to(card,CardAccessor.POSITION_XY, BlackjackTrainer.tweenSpeed)
 		.target(pos.x,pos.y)
+		.delay(timer)
 		.start(BlackjackTrainer.tweenManager);
 	}
 

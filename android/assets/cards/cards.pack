@@ -5,16 +5,142 @@ filter: Nearest,Nearest
 repeat: none
 10_of_clubs
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 1, 718
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
 10_of_diamonds
   rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 1, 479
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+10_of_hearts
+  rotate: false
+  xy: 173, 718
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+10_of_spades
+  rotate: false
+  xy: 1, 240
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+2_of_clubs
+  rotate: false
+  xy: 173, 479
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+2_of_diamonds
+  rotate: false
+  xy: 345, 718
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+2_of_hearts
+  rotate: false
+  xy: 1, 1
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+2_of_spades
+  rotate: false
+  xy: 173, 240
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+3_of_clubs
+  rotate: false
+  xy: 345, 479
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+3_of_diamonds
+  rotate: false
+  xy: 517, 718
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+3_of_hearts
+  rotate: false
+  xy: 173, 1
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+3_of_spades
+  rotate: false
+  xy: 345, 240
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+4_of_clubs
+  rotate: false
+  xy: 517, 479
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+4_of_diamonds
+  rotate: false
+  xy: 689, 718
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+4_of_hearts
+  rotate: false
+  xy: 345, 1
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+4_of_spades
+  rotate: false
+  xy: 517, 240
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+5_of_clubs
+  rotate: false
+  xy: 689, 479
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+5_of_diamonds
+  rotate: false
+  xy: 517, 1
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+5_of_hearts
+  rotate: false
+  xy: 689, 240
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+5_of_spades
+  rotate: false
+  xy: 689, 1
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
 
@@ -22,18 +148,144 @@ cards2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-10_of_hearts
+6_of_clubs
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 1, 718
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-10_of_spades
+6_of_diamonds
   rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 1, 479
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+6_of_hearts
+  rotate: false
+  xy: 173, 718
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+6_of_spades
+  rotate: false
+  xy: 1, 240
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+7_of_clubs
+  rotate: false
+  xy: 173, 479
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+7_of_diamonds
+  rotate: false
+  xy: 345, 718
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+7_of_hearts
+  rotate: false
+  xy: 1, 1
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+7_of_spades
+  rotate: false
+  xy: 173, 240
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+8_of_clubs
+  rotate: false
+  xy: 345, 479
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+8_of_diamonds
+  rotate: false
+  xy: 517, 718
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+8_of_hearts
+  rotate: false
+  xy: 173, 1
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+8_of_spades
+  rotate: false
+  xy: 345, 240
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+9_of_clubs
+  rotate: false
+  xy: 517, 479
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+9_of_diamonds
+  rotate: false
+  xy: 689, 718
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+9_of_hearts
+  rotate: false
+  xy: 345, 1
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+9_of_spades
+  rotate: false
+  xy: 517, 240
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+ace_of_clubs
+  rotate: false
+  xy: 689, 479
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+ace_of_diamonds
+  rotate: false
+  xy: 517, 1
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+ace_of_hearts
+  rotate: false
+  xy: 689, 240
+  size: 170, 237
+  orig: 170, 237
+  offset: 0, 0
+  index: -1
+ace_of_spades
+  rotate: false
+  xy: 689, 1
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
 
@@ -41,599 +293,94 @@ cards3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-2_of_clubs
+back_of_card
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 1, 718
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-2_of_diamonds
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards4.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-2_of_hearts
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-2_of_spades
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards5.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-3_of_clubs
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-3_of_diamonds
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards6.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-3_of_hearts
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-3_of_spades
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards7.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-4_of_clubs
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-4_of_diamonds
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards8.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-4_of_hearts
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-4_of_spades
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards9.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-5_of_clubs
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-5_of_diamonds
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards10.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-5_of_hearts
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-5_of_spades
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards11.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-6_of_clubs
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-6_of_diamonds
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards12.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-6_of_hearts
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-6_of_spades
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards13.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-7_of_clubs
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-7_of_diamonds
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards14.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-7_of_hearts
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-7_of_spades
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards15.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-8_of_clubs
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-8_of_diamonds
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards16.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-8_of_hearts
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-8_of_spades
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards17.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-9_of_clubs
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-9_of_diamonds
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards18.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-9_of_hearts
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-9_of_spades
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards19.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-ace_of_clubs
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-ace_of_diamonds
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards20.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-ace_of_hearts
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-ace_of_spades
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards21.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-ace_of_spades2
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-black_joker
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards22.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 jack_of_clubs
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 1, 479
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-jack_of_clubs2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards23.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 jack_of_diamonds
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 173, 718
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-jack_of_diamonds2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards24.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 jack_of_hearts
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 1, 240
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-jack_of_hearts2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards25.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 jack_of_spades
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 173, 479
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-jack_of_spades2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards26.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 king_of_clubs
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 345, 718
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-king_of_clubs2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards27.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 king_of_diamonds
   rotate: false
   xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-king_of_diamonds2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards28.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 king_of_hearts
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 173, 240
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-king_of_hearts2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards29.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 king_of_spades
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 345, 479
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-king_of_spades2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards30.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 queen_of_clubs
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 517, 718
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-queen_of_clubs2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards31.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 queen_of_diamonds
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 173, 1
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-queen_of_diamonds2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards32.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 queen_of_hearts
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 345, 240
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
-queen_of_hearts2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards33.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 queen_of_spades
   rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-queen_of_spades2
-  rotate: false
-  xy: 503, 1
-  size: 500, 726
-  orig: 500, 726
-  offset: 0, 0
-  index: -1
-
-cards34.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-red_joker
-  rotate: false
-  xy: 1, 1
-  size: 500, 726
-  orig: 500, 726
+  xy: 517, 479
+  size: 170, 237
+  orig: 170, 237
   offset: 0, 0
   index: -1
